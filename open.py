@@ -1,6 +1,6 @@
-import requests
-import json
 import os
+import json
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,7 +9,7 @@ api_key = os.getenv("OPENROUTER_KEY", "")
 
 prompt = input('You: ')
 
-def openGPT(prompt):
+def openGPT(user_prompt: str):
     response = requests.post(
         url = "https://openrouter.ai/api/v1/chat/completions",
         headers = {
@@ -21,7 +21,7 @@ def openGPT(prompt):
             'model': 'qwen/qwen3-4b:free', #openai/gpt-4o-mini
             'messages': [{
                 'role': 'user',
-                'content': prompt
+                'content': user_prompt
             }]
         })
     )    
@@ -29,6 +29,6 @@ def openGPT(prompt):
     result = response.json()['choices'][0]['message']['content']
     # result = response.json()
 
-    return result 
+    return result
 
 print(openGPT(prompt))
