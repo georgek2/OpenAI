@@ -18,7 +18,7 @@ def openGPT(user_prompt: str):
         },
         
         data = json.dumps({
-            'model': 'qwen/qwen3-4b:free', #openai/gpt-4o-mini
+            'model': 'openai/gpt-4o-mini',
             'messages': [{
                 'role': 'user',
                 'content': user_prompt
@@ -31,4 +31,11 @@ def openGPT(user_prompt: str):
 
     return result
 
-print(openGPT(prompt))
+
+while True:
+    if prompt in ['quit', 'exit', 'bye']:
+        break
+    print(openGPT(prompt))
+    
+    prompt = input('You: ')
+
